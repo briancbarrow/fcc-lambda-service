@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "offline": "sls offline start --skipCacheInvalidation",
-    "deploy": "rm -rf ./node_modules && npm i --production sls deploy --aws-profile serverless-admin"
+    "pre-deploy": "rm -rf ./node_modules && npm i --production",
+    "deploy": "sls deploy --aws-profile serverless-admin"
   },
   "author": "Brian Barrow",
   "license": "ISC",

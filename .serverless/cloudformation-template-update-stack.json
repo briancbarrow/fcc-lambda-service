@@ -59,7 +59,7 @@
     "AppLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/sample-app-production-app"
+        "LogGroupName": "/aws/lambda/fcc-slc-app-production-app"
       }
     },
     "IamRoleLambdaExecution": {
@@ -88,7 +88,7 @@
                 "-",
                 [
                   "production",
-                  "sample-app",
+                  "fcc-slc-app",
                   "lambda"
                 ]
               ]
@@ -103,7 +103,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sample-app-production*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/fcc-slc-app-production*:*"
                     }
                   ]
                 },
@@ -114,7 +114,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sample-app-production*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/fcc-slc-app-production*:*:*"
                     }
                   ]
                 }
@@ -127,7 +127,7 @@
           "Fn::Join": [
             "-",
             [
-              "sample-app",
+              "fcc-slc-app",
               "production",
               {
                 "Ref": "AWS::Region"
@@ -145,9 +145,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/sample-app/production/1576687664801-2019-12-18T16:47:44.801Z/sample-app.zip"
+          "S3Key": "serverless/fcc-slc-app/production/1576712618002-2019-12-18T23:43:38.002Z/fcc-slc-app.zip"
         },
-        "FunctionName": "sample-app-production-app",
+        "FunctionName": "fcc-slc-app-production-app",
         "Handler": "server.run",
         "MemorySize": 128,
         "Role": {
@@ -170,20 +170,20 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AppLambdaVersionoEhDfzZzXlVpCuwb4nwapcxvkwnjqvRNhNeKFFdLc": {
+    "AppLambdaVersion5xSGcxxWRZUJFJipVZZI2UOaICp7XlRrEZUhwbwvqQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "qbv7SutBqeA+S1ehXkLQRDmQQyQaNLL8uPXjn2vWumk="
+        "CodeSha256": "jbwREuEGAaVS+alLoj1oUObVUh9BqiGBDfj4UfahsUY="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "production-sample-app",
+        "Name": "production-fcc-slc-app",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -388,7 +388,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1576687661279": {
+    "ApiGatewayDeployment1576712614220": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -450,7 +450,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionoEhDfzZzXlVpCuwb4nwapcxvkwnjqvRNhNeKFFdLc"
+        "Ref": "AppLambdaVersion5xSGcxxWRZUJFJipVZZI2UOaICp7XlRrEZUhwbwvqQ"
       }
     },
     "ServiceEndpoint": {
