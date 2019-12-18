@@ -1,4 +1,4 @@
-service: sample-app
+service: fcc-slc-app
 custom:
   secrets: ${file(secrets.json)}
 provider:

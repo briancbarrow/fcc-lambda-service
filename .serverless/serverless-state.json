@@ -5,11 +5,15 @@
       "name": "sample-app"
     },
     "provider": {
-      "stage": "dev",
+      "stage": "production",
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*?]+?)}",
       "name": "aws",
       "runtime": "nodejs10.x",
       "region": "us-west-2",
+      "environment": {
+        "NODE_ENV": "production",
+        "DB": "mongodb+srv://lambdauser:ZjhDfgBXshGezthA@cluster0-2vinq.mongodb.net/fccslc?retryWrites=true&w=majority"
+      },
       "memorySize": 128,
       "versionFunctions": true,
       "remoteFunctionData": null,
@@ -74,7 +78,7 @@
           "AppLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/sample-app-dev-app"
+              "LogGroupName": "/aws/lambda/sample-app-production-app"
             }
           },
           "IamRoleLambdaExecution": {
@@ -102,7 +106,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "dev",
+                        "production",
                         "sample-app",
                         "lambda"
                       ]
@@ -118,7 +122,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sample-app-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sample-app-production*:*"
                           }
                         ]
                       },
@@ -129,7 +133,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sample-app-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/sample-app-production*:*:*"
                           }
                         ]
                       }
@@ -143,7 +147,7 @@
                   "-",
                   [
                     "sample-app",
-                    "dev",
+                    "production",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -160,10 +164,10 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/sample-app/dev/1576597965880-2019-12-17T15:52:45.880Z/sample-app.zip"
+                "S3Key": "serverless/sample-app/production/1576687664801-2019-12-18T16:47:44.801Z/sample-app.zip"
               },
-              "FunctionName": "sample-app-dev-app",
-              "Handler": "app/app.handler",
+              "FunctionName": "sample-app-production-app",
+              "Handler": "server.run",
               "MemorySize": 128,
               "Role": {
                 "Fn::GetAtt": [
@@ -172,27 +176,33 @@
                 ]
               },
               "Runtime": "nodejs10.x",
-              "Timeout": 6
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "NODE_ENV": "production",
+                  "DB": "mongodb+srv://lambdauser:ZjhDfgBXshGezthA@cluster0-2vinq.mongodb.net/fccslc?retryWrites=true&w=majority"
+                }
+              }
             },
             "DependsOn": [
               "AppLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionyGsnMzBjFuqmkFREXHuHnxrT8k5MtOZfWzzxJUCt0": {
+          "AppLambdaVersionoEhDfzZzXlVpCuwb4nwapcxvkwnjqvRNhNeKFFdLc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "5QdaIv1HXxT3wyQoVtj7g7dD4d6lzUL3Erom3NNWaX8="
+              "CodeSha256": "qbv7SutBqeA+S1ehXkLQRDmQQyQaNLL8uPXjn2vWumk="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-sample-app",
+              "Name": "production-sample-app",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -397,13 +407,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1576597962961": {
+          "ApiGatewayDeployment1576687661279": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               },
-              "StageName": "dev"
+              "StageName": "production"
             },
             "DependsOn": [
               "ApiGatewayMethodOptions",
@@ -459,7 +469,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionyGsnMzBjFuqmkFREXHuHnxrT8k5MtOZfWzzxJUCt0"
+              "Ref": "AppLambdaVersionoEhDfzZzXlVpCuwb4nwapcxvkwnjqvRNhNeKFFdLc"
             }
           },
           "ServiceEndpoint": {
@@ -480,7 +490,7 @@
                   {
                     "Ref": "AWS::URLSuffix"
                   },
-                  "/dev"
+                  "/production"
                 ]
               ]
             }
@@ -556,10 +566,16 @@
       },
       "vpc": {}
     },
+    "custom": {
+      "secrets": {
+        "NODE_ENV": "production",
+        "DB": "mongodb+srv://lambdauser:ZjhDfgBXshGezthA@cluster0-2vinq.mongodb.net/fccslc?retryWrites=true&w=majority"
+      }
+    },
     "pluginsData": {},
     "functions": {
       "app": {
-        "handler": "app/app.handler",
+        "handler": "server.run",
         "events": [
           {
             "http": {
@@ -614,7 +630,7 @@
             }
           }
         ],
-        "name": "sample-app-dev-app",
+        "name": "sample-app-production-app",
         "package": {},
         "memory": 128,
         "timeout": 6,
@@ -627,7 +643,7 @@
     "artifact": "/Users/bbarrow/Documents/personal/lambda-atlas-create-doc/.serverless/sample-app.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/sample-app/dev/1576597965880-2019-12-17T15:52:45.880Z",
+    "artifactDirectoryName": "serverless/sample-app/production/1576687664801-2019-12-18T16:47:44.801Z",
     "artifact": "sample-app.zip"
   }
 }
