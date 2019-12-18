@@ -9,6 +9,15 @@
   "author": "Brian Barrow",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^3.4.0"
+    "aws-sdk": "^2.591.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "mongodb": "^3.4.0",
+    "mongoose": "^5.8.1",
+    "serverless-http": "^2.3.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^5.12.1"
   }
 }

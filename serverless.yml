@@ -1,0 +1,26 @@
+service: sample-app
+custom:
+  secrets: ${file(secrets.json)}
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${self:custom.secrets.NODE_ENV}
+  region: us-west-2
+  environment: 
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+    DB: ${self:custom.secrets.DB}
+  memorySize: 128
+functions:
+  app:
+    handler: server.run
+    events: 
+      - http: 
+          path: /
+          method: ANY
+          cors: true
+      - http: 
+          path: /{proxy+}
+          method: ANY
+          cors: true
+plugins:
+  - serverless-offline
