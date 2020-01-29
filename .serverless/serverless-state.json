@@ -164,7 +164,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/fcc-slc-app/production/1576712618002-2019-12-18T23:43:38.002Z/fcc-slc-app.zip"
+                "S3Key": "serverless/fcc-slc-app/production/1580266714445-2020-01-29T02:58:34.445Z/fcc-slc-app.zip"
               },
               "FunctionName": "fcc-slc-app-production-app",
               "Handler": "server.run",
@@ -189,14 +189,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersion5xSGcxxWRZUJFJipVZZI2UOaICp7XlRrEZUhwbwvqQ": {
+          "AppLambdaVersionXjVAtc8PW1GIJQi6ELBtOcaX9mjhnrxb9t24sLWOQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "jbwREuEGAaVS+alLoj1oUObVUh9BqiGBDfj4UfahsUY="
+              "CodeSha256": "lPjPW4//Vzcrzm4zj5HrOhzXzPQeJb51gVxVNfrsPZ4="
             }
           },
           "ApiGatewayRestApi": {
@@ -407,7 +407,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1576712614220": {
+          "ApiGatewayDeployment1580266708512": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -469,7 +469,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion5xSGcxxWRZUJFJipVZZI2UOaICp7XlRrEZUhwbwvqQ"
+              "Ref": "AppLambdaVersionXjVAtc8PW1GIJQi6ELBtOcaX9mjhnrxb9t24sLWOQ"
             }
           },
           "ServiceEndpoint": {
@@ -643,7 +643,7 @@
     "artifact": "/Users/bbarrow/Documents/personal/lambda-atlas-create-doc/.serverless/fcc-slc-app.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/fcc-slc-app/production/1576712618002-2019-12-18T23:43:38.002Z",
+    "artifactDirectoryName": "serverless/fcc-slc-app/production/1580266714445-2020-01-29T02:58:34.445Z",
     "artifact": "fcc-slc-app.zip"
   }
 }
